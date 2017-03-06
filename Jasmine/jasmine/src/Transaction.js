@@ -5,12 +5,14 @@ function Transaction(){
   this._revised_balance = null;
 }
 
-Transaction.prototype.deposit = function(date, value){
+Transaction.prototype.deposit = function(date, value, balance){
   this._date = date;
   this._deposit = value;
+  this._revised_balance = (balance += value);
 };
 
-Transaction.prototype.withdraw = function(date, value){
+Transaction.prototype.withdraw = function(date, value, balance){
   this._date = date;
   this._credit = value;
+  this._revised_balance = (balance -= value);
 };
