@@ -45,4 +45,23 @@ describe("Account", function() {
       expect(account.viewCurrentBalance()).toEqual(20.00);
     });
   });
+
+  describe ("edge cases", function(){
+
+    it("should raise an error if deposit is called with 0", function(){
+      expect(function() {account.deposit(0)}).toThrow("Please enter a positive number");
+    });
+
+    it("should raise an error if withdrawal is called with 0", function(){
+      expect(function() {account.withdraw(0)}).toThrow("Please enter a positive number");
+    });
+
+    it("should raise an error if deposit is called with a negative number", function(){
+      expect(function() {account.deposit(-1)}).toThrow("Please enter a positive number");
+    });
+
+    it("should raise an error if withdrawal is called with a negative number", function(){
+      expect(function() {account.withdraw(-1)}).toThrow("Please enter a positive number");
+    });
+  });
 });

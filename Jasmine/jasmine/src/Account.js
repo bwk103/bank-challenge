@@ -8,17 +8,25 @@ Account.prototype.viewCurrentBalance = function(){
 };
 
 Account.prototype.deposit = function(value){
-  var transaction = new Transaction();
-  transaction.deposit(new Date(), value, this.viewCurrentBalance());
-  this._transactionHistory.unshift(transaction);
-  this._balance += value;
+  if (value < 1) {
+    throw "Please enter a positive number";
+  } else {
+    var transaction = new Transaction();
+    transaction.deposit(new Date(), value, this.viewCurrentBalance());
+    this._transactionHistory.unshift(transaction);
+    this._balance += value;
+  }
 };
 
 Account.prototype.withdraw = function(value){
-  var transaction = new Transaction();
-  transaction.withdraw(new Date(), value, this.viewCurrentBalance());
-  this._transactionHistory.unshift(transaction);
-  this._balance -= value;
+  if (value < 1) {
+    throw "Please enter a positive number";
+  } else {
+    var transaction = new Transaction();
+    transaction.withdraw(new Date(), value, this.viewCurrentBalance());
+    this._transactionHistory.unshift(transaction);
+    this._balance -= value;
+  }
 };
 
 Account.prototype.viewTransactionHistory = function(value){
