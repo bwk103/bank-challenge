@@ -9,8 +9,8 @@ describe("Transaction", function() {
       expect(transaction._deposit).toEqual(null);
     });
 
-    it("has a null withdrawl value", function() {
-      expect(transaction._withdrawal).toEqual(null);
+    it("has a null credit value", function() {
+      expect(transaction._credit).toEqual(null);
     });
 
     it("has a null date value", function() {
