@@ -8,7 +8,7 @@ describe("Transaction", function() {
   describe("when initialized", function(){
 
     it("has a null deposit value", function() {
-      expect(transaction._deposit).toEqual(null);
+      expect(transaction._debit).toEqual(null);
     });
 
     it("has a null credit value", function() {
@@ -27,15 +27,15 @@ describe("Transaction", function() {
   describe("when making a deposit", function(){
 
     beforeEach (function() {
-      transaction.deposit("11/11/17", 100.00, 0);
+      transaction.deposit(new Date(), 100.00, 0);
     });
 
-    it("sets the transaction date", function(){
-      expect(transaction._date).toEqual("11/11/17");
+    it("sets the transaction's date", function(){
+      expect(typeof transaction._date).toEqual("object");
     });
 
-    it("sets the deposit value", function(){
-      expect(transaction._deposit).toEqual(100.00);
+    it("sets the value to credit the account", function(){
+      expect(transaction._credit).toEqual(100.00);
     });
 
     it("sets the revised_balance", function(){
@@ -46,26 +46,26 @@ describe("Transaction", function() {
   describe("when making a withdrawal", function(){
 
     beforeEach (function() {
-      transaction.deposit("12/11/17", 80.00, 0);
+      transaction.withdraw(new Date(), 80.00, 100.00);
     });
 
-    it("sets the transaction date", function(){
-      expect(transaction._date).toEqual("12/11/17");
+    it("converts the string provided into a Date object", function(){
+      expect(typeof transaction._date).toEqual("object");
     });
 
-    it("sets the deposit value", function(){
-      expect(transaction._deposit).toEqual(80.00);
+    it("sets the value to debit the account", function(){
+      expect(transaction._debit).toEqual(80.00);
     });
 
     it("sets the revised_balance", function(){
-      expect(transaction._revised_balance).toEqual(80.00);
+      expect(transaction._revised_balance).toEqual(20.00);
     });
   });
 
   describe("when making multiple transactions", function(){
     beforeEach (function() {
-      transaction.deposit("11/11/17", 150.00, 0);
-      transaction2.withdraw("12/11/17", 65.00, 150.00);
+      transaction.deposit(new Date(), 150.00, 0);
+      transaction2.withdraw(new Date(), 65.00, 150.00);
     });
 
     it("sets the revised_balance of the transaction", function(){
