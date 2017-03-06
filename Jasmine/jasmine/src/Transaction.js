@@ -9,3 +9,8 @@ Transaction.prototype.deposit = function(date, value){
   this._date = date;
   this._deposit = value;
 };
+
+Transaction.prototype.withdraw = function(date, value){
+  this._date = date;
+  this._credit = value;
+};

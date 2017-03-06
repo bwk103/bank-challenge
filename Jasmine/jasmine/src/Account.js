@@ -13,3 +13,10 @@ Account.prototype.deposit = function(date, value){
   this._transactionHistory.push(transaction);
   this._balance += value;
 };
+
+Account.prototype.withdraw = function(date, value){
+  var transaction = new Transaction();
+  transaction.withdraw(date, value);
+  this._transactionHistory.push(transaction);
+  this._balance -= value;
+};
