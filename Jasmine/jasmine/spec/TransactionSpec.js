@@ -27,7 +27,7 @@ describe("Transaction", function() {
   describe("when making a deposit", function(){
 
     beforeEach (function() {
-      transaction.deposit(new Date(), 100.00, 0);
+      transaction.deposit(new Date(2017, 2, 7), 100.00, 0);
     });
 
     it("sets the transaction's date", function(){
@@ -46,7 +46,7 @@ describe("Transaction", function() {
   describe("when making a withdrawal", function(){
 
     beforeEach (function() {
-      transaction.withdraw(new Date(), 80.00, 100.00);
+      transaction.withdraw(new Date(2017, 2, 7), 80.00, 100.00);
     });
 
     it("converts the string provided into a Date object", function(){
@@ -64,8 +64,8 @@ describe("Transaction", function() {
 
   describe("when making multiple transactions", function(){
     beforeEach (function() {
-      transaction.deposit(new Date(), 150.00, 0);
-      transaction2.withdraw(new Date(), 65.00, 150.00);
+      transaction.deposit(new Date(2017, 2, 7), 150.00, 0);
+      transaction2.withdraw(new Date(2017, 2, 7), 65.00, 150.00);
     });
 
     it("sets the revised_balance of the transaction", function(){
