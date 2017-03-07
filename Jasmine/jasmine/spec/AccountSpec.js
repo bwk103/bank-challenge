@@ -18,7 +18,8 @@ describe("Account", function() {
   describe("when making a deposit", function(){
 
     beforeEach(function() {
-      account.deposit(100.00);
+      transaction = jasmine.createSpyObj("transaction", ['deposit']);
+      account.deposit(100.00, transaction);
     });
 
     it("adds the transaction to the transaction history", function(){
@@ -28,13 +29,19 @@ describe("Account", function() {
     it("adds the value of the transaction to the account balance", function(){
       expect(account.viewCurrentBalance()).toEqual(100.00);
     });
+
+    it("calls the transaction's deposit method", function(){
+      account.deposit(100.00, transaction);
+      expect(transaction.deposit).toHaveBeenCalled();
+    });
   });
 
   describe("when making a withdrawal", function(){
 
     beforeEach(function() {
-      account.deposit(100.00);
-      account.withdraw(80.00);
+      transaction = jasmine.createSpyObj("transaction", ['deposit', 'withdraw']);
+      account.deposit(100.00, transaction);
+      account.withdraw(80.00, transaction);
     });
 
     it("adds the transaction to the transaction history", function(){
@@ -43,6 +50,20 @@ describe("Account", function() {
 
     it("deducts the value of the transaction from the account balance", function(){
       expect(account.viewCurrentBalance()).toEqual(20.00);
+    });
+    it("calls the transaction's deposit method", function(){
+      account.deposit(100.00, transaction);
+      expect(transaction.withdraw).toHaveBeenCalled();
+    });
+  });
+
+  describe("when requesting a statement", function(){
+    it("calls StatementPrinter's print method", function(){
+      statementPrinter = jasmine.createSpyObj("printer", ['print']);
+      transaction = jasmine.createSpyObj("transaction", ['deposit']);
+      account.deposit(100.00, transaction);
+      account.statement(statementPrinter);
+      expect(statementPrinter.print).toHaveBeenCalled();
     });
   });
 
